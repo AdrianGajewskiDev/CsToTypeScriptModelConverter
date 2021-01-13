@@ -15,7 +15,10 @@
             </Grid.RowDefinitions>
 
             <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="12">Paste your CS code below</Label>
-            <TextBox x:Name="MainTextBox" Text="{Binding CSCode}" Grid.Row="1" />
+            <TextBox Name="MainTextBox" 
+                     Height="auto"
+                     TextWrapping="Wrap" AcceptsReturn="True" 
+                     Text="{Binding CSCode}" Grid.Row="1" Foreground="#000" FontSize="8"/>
             <Button Command="{Binding ConvertCommand}" Grid.Row="2" Margin="50 10" Click="Button_Click">Convert</Button>
         </Grid>
     </Grid>

@@ -22,6 +22,11 @@
         {
             viewModel.CSCode = MainTextBox.Text;
             viewModel.ConvertCommand.Execute(sender);
+            ClearTextbox();
+            MainTextBox.Text = viewModel.TSCode;
+            
         }
+
+        void ClearTextbox() => MainTextBox.Text = string.Empty;
     }
 }
