@@ -1,4 +1,5 @@
-﻿using Converter.Core.Reflection;
+﻿using Converter.Core.Converter;
+using Converter.Core.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 
@@ -19,7 +20,9 @@ namespace Converter.Console
                         public string Gearbox { get; set; }
                     }";
 
-            var type = TypeResolver.Get(code);
+            var tsCode = new CTSConverter().Convert(code);
+
+            System.Console.Write(tsCode);
         }
     }
 }

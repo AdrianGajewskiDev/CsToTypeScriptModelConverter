@@ -1,4 +1,5 @@
-﻿using Converter.Core.Reflection;
+﻿using Converter.Core.Converter;
+using Converter.Core.Reflection;
 using CSToTypeScritpModelConverter.Windows.Commands;
 using System.Windows.Input;
 
@@ -27,12 +28,7 @@ namespace CSToTypeScritpModelConverter.Windows.Models.ViewModels
 
         private void Convert()
         {
-            var type = TypeResolver.Get(m_CSCode);
-
-            foreach (var item in type)
-            {
-                m_TSCode += item.Name;
-            }
+            TSCode = new CTSConverter().Convert(m_CSCode);
         }
     }
 }

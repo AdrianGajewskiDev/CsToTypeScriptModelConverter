@@ -1,0 +1,8 @@
+﻿namespace Converter.Core.Values
+{
+    public class CSharpProperty
+    {
+        public string Type { get; set; }
+        public string Value { get; set; }
+    }
+}

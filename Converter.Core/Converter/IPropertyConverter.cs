@@ -1,8 +1,10 @@
 ﻿
+using Converter.Core.Values;
+
 namespace Converter.Core.Converter
 {
     public interface IPropertyConverter
     {
-        string ConvertProperty(string prop, out string result);
+        void ConvertProperty(CSharpProperty prop, ref string result);
     }
 }
