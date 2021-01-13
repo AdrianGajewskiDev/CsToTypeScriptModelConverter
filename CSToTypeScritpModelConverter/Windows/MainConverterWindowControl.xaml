@@ -3,21 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
              mc:Ignorable="d"
              d:DesignHeight="310" d:DesignWidth="300"
              Name="MyToolWindow">
     <Grid>
-        <Grid Background="#000">
+        <Grid Background="#000" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
                 <RowDefinition Height="5*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label Foreground="#fff" Margin="50 0" Padding="30 0">Paste your CS code below</Label>
-            <TextBox Grid.Row="1" />
-            <Button Grid.Row="2" Margin="50 10">Convert</Button>
+            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="12">Paste your CS code below</Label>
+            <TextBox x:Name="MainTextBox" Text="{Binding CSCode}" Grid.Row="1" />
+            <Button Command="{Binding ConvertCommand}" Grid.Row="2" Margin="50 10" Click="Button_Click">Convert</Button>
         </Grid>
     </Grid>
 </UserControl>
