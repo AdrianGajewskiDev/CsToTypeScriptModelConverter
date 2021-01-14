@@ -12,7 +12,7 @@ namespace Converter.Console
             string code = @"
 	                public class Car : Vehicle
                     {
-                        public string CarBrand { get; set; }
+                        public string[] CarBrand { get; set; }
                         public string CarModel { get; set; }
                         public string CarType { get; set; }
                         public int NumberOfDoors { get; set; }
@@ -23,6 +23,7 @@ namespace Converter.Console
             var tsCode = new CTSConverter().Convert(code);
 
             System.Console.Write(tsCode);
+            System.Console.ReadLine();
         }
     }
 }

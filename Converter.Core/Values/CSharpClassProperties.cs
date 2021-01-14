@@ -22,7 +22,13 @@ namespace Converter.Core.Values
             foreach (var symbol in symbols)
             {
                 var property = (IPropertySymbol)symbol;
-                var type = property.Type.Name;
+                string type = property.Type.Name;
+
+                if(property.Type is IArrayTypeSymbol arraySymbolType)
+                {
+                    type = arraySymbolType.ElementType.Name + "[]";
+                }
+
                 properties.Add(new CSharpProperty 
                 {
                     Type = type,
