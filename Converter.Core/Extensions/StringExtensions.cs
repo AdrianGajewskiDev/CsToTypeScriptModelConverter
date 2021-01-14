@@ -17,7 +17,7 @@
             {
                 case "String": convertedType = "string"; break;
                 case "Char": convertedType = "string"; break;
-                case "bool": convertedType = "boolean"; break;
+                case "Boolean": convertedType = "boolean"; break;
                 case "Single": convertedType = "number"; break;
                 case "Int32": convertedType = "number"; break;
                 case "Decimal": convertedType = "number"; break;

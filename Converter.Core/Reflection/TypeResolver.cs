@@ -3,13 +3,14 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Converter.Core.Reflection
 {
     public static class TypeResolver
     {
+        public static event Action HandleError;
+
         public static CSharpClass Get(string code)
         {
             try
@@ -28,7 +29,8 @@ namespace Converter.Core.Reflection
             catch(Exception ex)
             {
 
-                //TODO: add error handling
+                HandleError?.Invoke();
+
                 return null;
             }
         }

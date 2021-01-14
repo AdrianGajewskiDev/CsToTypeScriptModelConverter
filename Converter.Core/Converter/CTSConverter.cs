@@ -1,4 +1,5 @@
-﻿using Converter.Core.Extensions;
+﻿using Converter.Core.ErrorHandling;
+using Converter.Core.Extensions;
 using Converter.Core.Reflection;
 using Converter.Core.Values;
 using System;
@@ -12,6 +13,10 @@ namespace Converter.Core.Converter
         public string Convert(string csCode)
         {
             var scClass = TypeResolver.Get(csCode);
+
+            if (scClass == null)
+                return string.Empty;
+
             var tsCode = new StringBuilder().Append($@"export class {scClass.ClassName}" + "{ /");
 
             foreach (var prop in scClass.GetProperties())

@@ -1,5 +1,7 @@
 ﻿namespace CSToTypeScritpModelConverter.Windows
 {
+    using Converter.Core;
+    using Converter.Core.Converter;
     using CSToTypeScritpModelConverter.Windows.Models.ViewModels;
     using System.Windows.Controls;
 
@@ -9,13 +11,14 @@
     public partial class ConverterWindowControl : UserControl
     {
         private ConverterWindowViewModel viewModel = new ConverterWindowViewModel();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ConverterWindowControl "/> class.
         /// </summary>
         public ConverterWindowControl()
         {
             this.InitializeComponent();
+
+
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)

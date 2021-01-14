@@ -1,5 +1,6 @@
-﻿using Converter.Core.Converter;
-using Converter.Core.Reflection;
+﻿using Converter.Core;
+using Converter.Core.Converter;
+using CSToTypeScritpModelConverter.ErrorHandling;
 using CSToTypeScritpModelConverter.Windows.Commands;
 using System.Windows.Input;
 
@@ -7,9 +8,15 @@ namespace CSToTypeScritpModelConverter.Windows.Models.ViewModels
 {
     public class ConverterWindowViewModel : BaseViewModel
     {
+        private IConverter m_Converter;
+
         public ConverterWindowViewModel()
         {
             ConvertCommand = new BaseCommand(Convert);
+            m_Converter = new ConverterBuilder()
+                .AddErrorHandler<ConverterErrorHandler>()
+                .AddConverter<CTSConverter>()
+                .Build();
         }
 
 
@@ -28,7 +35,7 @@ namespace CSToTypeScritpModelConverter.Windows.Models.ViewModels
 
         private void Convert()
         {
-            TSCode = new CTSConverter().Convert(m_CSCode);
+            TSCode = m_Converter.Convert(m_CSCode);
         }
     }
 }
