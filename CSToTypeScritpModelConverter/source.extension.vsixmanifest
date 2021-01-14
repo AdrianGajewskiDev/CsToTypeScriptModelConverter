@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="CSToTypeScritpModelConverter.69cab2c4-8bb2-4186-87d2-98e48ba09fc7" Version="1.0" Language="en-US" Publisher="adrian.gajewskiDev@outlook.com" />
-        <DisplayName>CSToTypeScritpModelConverter</DisplayName>
+        <Identity Id="CSToTypeScritpModelConverter.69cab2c4-8bb2-4186-87d2-98e48ba09fc7" Version="1.0" Language="en-US" Publisher="AdrianDev" />
+        <DisplayName>C# To TypeScript model converter</DisplayName>
         <Description xml:space="preserve">A visual studio extension that allows to convert CSharp class to TypeScript classA visual studio extension that allows to convert CSharp class to TypeScript class</Description>
+        <GettingStartedGuide>GettingStarted.txt</GettingStartedGuide>
+        <Icon>Icon.png</Icon>
+        <PreviewImage>previewImage.PNG</PreviewImage>
+        <Tags>CSharp Converter, TypeScript Converter, Converter, C#, TS, CSharpToTypeScript, C#ToTS</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />

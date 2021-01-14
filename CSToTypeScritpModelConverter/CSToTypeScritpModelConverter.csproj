@@ -88,6 +88,18 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GettingStarted.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="previewImage.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\TestCommand.png" />
     <Content Include="Windows\Resources\MainConverterWindowCommand.png" />
   </ItemGroup>
