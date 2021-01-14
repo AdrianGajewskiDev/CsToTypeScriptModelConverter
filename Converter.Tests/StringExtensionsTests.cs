@@ -19,5 +19,15 @@ namespace Converter.Tests
 
             convertedType.Should().Be(tsType);
         }
+
+        [Theory]
+        [InlineData("String[]", "string[]")]
+        [InlineData("Int32[]", "number[]")]
+        public void ShouldConvertCSharpArrayTypeToTSType(string csType, string tsType)
+        {
+            var convertedType = csType.ConvertToTS();
+
+            convertedType.Should().Be(tsType);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Converter.Core.Reflection
         {
             try
             {
+
                 var csCode = CSharpSyntaxTree.ParseText(code);
 
                 var compilation = CSharpCompilation.Create("Compilation").AddSyntaxTrees(csCode);
@@ -23,6 +24,9 @@ namespace Converter.Core.Reflection
                 var type = semanticModel.GetDeclaredSymbol(csCode.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
 
                 var properties = type.GetMembers().Where(x => x.Kind == SymbolKind.Property);
+
+                if (properties.Count() == 0)
+                    return null;
 
                 return new CSharpClass(properties, type.Name);
             }
@@ -34,5 +38,6 @@ namespace Converter.Core.Reflection
                 return null;
             }
         }
+
     }
 }
