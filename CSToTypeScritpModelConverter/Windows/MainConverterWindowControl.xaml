@@ -14,13 +14,14 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="16">Paste your CS code below</Label>
+            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="11">Paste your CS code below</Label>
             <TextBox Name="MainTextBox" 
                      Height="auto"
                      TextWrapping="Wrap" AcceptsReturn="True" 
                      Text="{Binding CSCode}" Grid.Row="1" Foreground="#000" FontSize="16"
                      AcceptsTab="True"/>
-            <Button Command="{Binding ConvertCommand}" Grid.Row="2" Margin="50 10" Click="Button_Click">Convert</Button>
+            <Button Command="{Binding ConvertCommand}" Grid.Row="2" Margin="50 10" Click="Button_Click" FontSize="17"
+                    Width="150">Convert</Button>
         </Grid>
     </Grid>
 </UserControl>

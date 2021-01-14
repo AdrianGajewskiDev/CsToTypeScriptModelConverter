@@ -48,7 +48,6 @@
     <Compile Include="ErrorHandling\ConverterErrorHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CSToTypeScritpModelConverterPackage.cs" />
-    <Compile Include="ConvertCommand.cs" />
     <Compile Include="Windows\Commands\BaseCommand.cs" />
     <Compile Include="Windows\ConverterWindow.cs" />
     <Compile Include="Windows\ConverterWindowCommand.cs" />

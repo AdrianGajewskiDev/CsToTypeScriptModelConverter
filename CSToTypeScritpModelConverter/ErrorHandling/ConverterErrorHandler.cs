@@ -7,7 +7,7 @@ namespace CSToTypeScritpModelConverter.ErrorHandling
     {
         public override void Handle()
         {
-            MessageBox.Show("Unable to complete", "Error", MessageBoxButtons.OK);
+            MessageBox.Show("Please paste valid C# code", "Invalid C# code", MessageBoxButtons.OK);
         }
     }
 }
