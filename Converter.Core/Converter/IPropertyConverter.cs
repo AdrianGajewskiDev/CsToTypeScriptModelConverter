@@ -8,6 +8,5 @@ namespace Converter.Core.Converter
     {
         void ConvertProperty(CSharpProperty prop, StringBuilder stringBuilder);
         void ConvertProperty(CSharpProperty prop, ref string result);
-        string ConvertPropertyType(string type);
     }
 }

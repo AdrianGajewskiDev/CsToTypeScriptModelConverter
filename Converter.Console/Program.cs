@@ -12,7 +12,7 @@ namespace Converter.Console
             string code = @"
 	                public class Car : Vehicle
                     {
-                        public string[] CarBrand { get; set; }
+                        public Dictionary<string, int> CarBrand { get; set; }
                         public string CarModel { get; set; }
                         public string CarType { get; set; }
                         public int NumberOfDoors { get; set; }
