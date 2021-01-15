@@ -10,12 +10,18 @@ namespace Converter.Core.Values
     {
         private IList<CSharpProperty> properties;
         private string m_ClassName;
+        private string m_BaseType;
 
         public string ClassName { get => m_ClassName; }
+        public string BaseTypeName { get => m_BaseType; }
+        public bool HasBaseType { get => !string.IsNullOrEmpty(m_BaseType); }
 
-        public CSharpClass(IEnumerable<ISymbol> symbols, string className)
+        public CSharpClass(IEnumerable<ISymbol> symbols, string className, string baseType)
         {
             properties = new List<CSharpProperty>();
+            if (!string.IsNullOrEmpty(baseType))
+                m_BaseType = baseType;
+
             m_ClassName = className;
             Parse(symbols);
         }
@@ -45,7 +51,6 @@ namespace Converter.Core.Values
 
                     var lastCommaIndex = type.IndexOf(">") - 1;
                     type = type.Remove(lastCommaIndex, 1);
-
                 }
 
                 properties.Add(new CSharpProperty 

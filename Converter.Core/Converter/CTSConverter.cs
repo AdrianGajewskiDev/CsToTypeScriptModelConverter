@@ -17,7 +17,15 @@ namespace Converter.Core.Converter
             if (scClass == null)
                 return string.Empty;
 
-            var tsCode = new StringBuilder().Append($@"export class {scClass.ClassName}" + "{ /");
+            string template = $"";
+
+            if (scClass.HasBaseType)
+                template = $@"export class {scClass.ClassName}" + $" extends {scClass.BaseTypeName}" + "{ /";
+            else
+                template = $@"export class {scClass.ClassName}" + "{ /";
+
+
+            var tsCode = new StringBuilder().Append(template);
 
             foreach (var prop in scClass.GetProperties())
             {
@@ -34,14 +42,14 @@ namespace Converter.Core.Converter
         {
             prop.Type = prop.Type.ConvertToTS();
 
-            stringBuilder.Append($"{prop.Value}: {prop.Type} /");
+            stringBuilder.Append($"{prop.Value}: {prop.Type}; /");
         }
 
         public void ConvertProperty(CSharpProperty prop, ref string result)
         {
             prop.Type = prop.Type.ConvertToTS();
 
-            result += $"{prop.Value}: {prop.Type} /";
+            result += $"{prop.Value}: {prop.Type}; /";
         }
 
     }
