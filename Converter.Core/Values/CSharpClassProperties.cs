@@ -19,7 +19,7 @@ namespace Converter.Core.Values
         public CSharpClass(IEnumerable<ISymbol> symbols, string className, string baseType)
         {
             properties = new List<CSharpProperty>();
-            if (!string.IsNullOrEmpty(baseType))
+            if (!string.IsNullOrEmpty(baseType) && !baseType.Equals("Object"))
                 m_BaseType = baseType;
 
             m_ClassName = className;
