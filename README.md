@@ -6,4 +6,12 @@ ___
 
 ## Usage:
 
+*Paste the CSharp class and click "Convert"*
 
+![Paste Image](https://github.com/AdrianGajewski1/CsToTypeScriptModelConverter/blob/main/CSToTypeScritpModelConverter/Paste.PNG?raw=true)
+
+## Result:
+![Paste Image](https://github.com/AdrianGajewski1/CsToTypeScriptModelConverter/blob/main/CSToTypeScritpModelConverter/convert.PNG?raw=true)
+
+___
+### Note that you can only convert classes, records are not supported yet.
