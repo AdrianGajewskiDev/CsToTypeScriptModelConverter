@@ -32,7 +32,6 @@ namespace Converter.Core.Reflection
             }
             catch(Exception ex)
             {
-
                 HandleError?.Invoke();
 
                 return null;

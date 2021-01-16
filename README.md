@@ -1,3 +1,9 @@
 # CsToTypeScriptModelConverter
-A visual studio extension that allows to convert CSharp class to TypeScript class
+## Convert C# Models, ViewModels and DTOs into their TypeScript equivalents.
 Link: https://marketplace.visualstudio.com/items?itemName=AdrianDev.exr123
+
+___
+
+## Usage:
+
+
