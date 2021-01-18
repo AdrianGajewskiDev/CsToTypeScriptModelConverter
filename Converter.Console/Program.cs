@@ -1,4 +1,7 @@
 ﻿using Converter.Core.Converter;
+using Converter.Core.Reflection;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 
 namespace Converter.Console
 {
@@ -10,7 +13,7 @@ namespace Converter.Console
 	                public partial class ProfileInfoModel : BaseNopModel
                     {
                         public DateTime AvatarUrl { get; set; }
-                        public Generic<int, Application> Values {get;set;}
+public Dictionary<DateTime,string> Values {get;set;}
 
                     }";
 

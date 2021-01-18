@@ -29,5 +29,16 @@ namespace Converter.Tests
 
             convertedType.Should().Be(tsType);
         }
+
+        [Theory]
+        [InlineData("Dictionary<string,string>", "{[key: string]: string}")]
+        [InlineData("Dictionary<int,ApplicationUser>", "{[key: number]: ApplicationUser}")]
+        [InlineData("Dictionary<DateTime,string>", "{[key: Date]: string}")]
+        public void ShouldConvertCSharpDictionaryTypeToTSDictionaryType(string csType, string tsType)
+        {
+            var convertedType = csType.ConvertToTS();
+
+            convertedType.Should().Be(tsType);
+        }
     }
 }

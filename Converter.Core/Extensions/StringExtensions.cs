@@ -24,8 +24,8 @@
                     if (values != null)
                     {
                         convertedType = "Dictionary";
-                        firstValue = values[0];
-                        secondtValue = values[1];
+                        firstValue = values[0].ConvertToTS();
+                        secondtValue = values[1].ConvertToTS();
                     }
                 }
             }
@@ -41,7 +41,9 @@
             switch (convertedType)
             {
                 case "String": convertedType = "string"; break;
+                case "string": convertedType = "string"; break;
                 case "Char": convertedType = "string"; break;
+                case "int": convertedType = "number"; break;
                 case "Boolean": convertedType = "boolean"; break;
                 case "Single": convertedType = "number"; break;
                 case "Int32": convertedType = "number"; break;
