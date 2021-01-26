@@ -1,6 +1,5 @@
 ﻿using Converter.Core.Reflection;
 using FluentAssertions;
-using System;
 using Xunit;
 
 namespace Converter.Tests

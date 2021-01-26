@@ -1,5 +1,4 @@
-﻿using Converter.Core.ErrorHandling;
-using Converter.Core.Extensions;
+﻿using Converter.Core.Extensions;
 using Converter.Core.Reflection;
 using Converter.Core.Values;
 using System;
@@ -29,7 +28,7 @@ namespace Converter.Core.Converter
 
             foreach (var prop in scClass.GetProperties())
             {
-               ConvertProperty(prop, tsCode);
+                ConvertProperty(prop, tsCode);
             }
             tsCode.Append("}/");
 

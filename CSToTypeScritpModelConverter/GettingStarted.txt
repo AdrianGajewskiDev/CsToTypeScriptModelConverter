@@ -1,3 +1,0 @@
-Go to View->Other Windows->CS to TS Converter
-
-Paste your CSharp model and press Convert.

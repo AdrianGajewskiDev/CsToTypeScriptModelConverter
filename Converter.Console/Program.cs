@@ -1,7 +1,4 @@
 ﻿using Converter.Core.Converter;
-using Converter.Core.Reflection;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
 
 namespace Converter.Console
 {

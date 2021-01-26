@@ -1,6 +1,4 @@
-﻿using Converter.Core.ErrorHandling;
-
-namespace Converter.Core.Converter
+﻿namespace Converter.Core.Converter
 {
     public interface IConverter : IPropertyConverter
     {

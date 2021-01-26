@@ -1,12 +1,11 @@
 ﻿using Converter.Core;
 using Converter.Core.Converter;
-using CSToTypeScritpModelConverter.ErrorHandling;
-using CSToTypeScritpModelConverter.Windows.Commands;
+using Converter.UI.Windows.Commands;
 using System.Windows.Input;
 
-namespace CSToTypeScritpModelConverter.Windows.Models.ViewModels
+namespace Converter.UI.Models.ViewModels
 {
-    public class ConverterWindowViewModel : BaseViewModel
+    public class ConverterWindowViewModel
     {
         private IConverter m_Converter;
 
@@ -14,7 +13,6 @@ namespace CSToTypeScritpModelConverter.Windows.Models.ViewModels
         {
             ConvertCommand = new BaseCommand(Convert);
             m_Converter = new ConverterBuilder()
-                .AddErrorHandler<ConverterErrorHandler>()
                 .AddConverter<CTSConverter>()
                 .Build();
         }

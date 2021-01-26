@@ -1,13 +1,10 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using System;
+using System.ComponentModel.Design;
 using Task = System.Threading.Tasks.Task;
 
-namespace CSToTypeScritpModelConverter.Windows
+namespace Converter.UI.Windows.MainWindow
 {
     /// <summary>
     /// Command handler
@@ -17,12 +14,12 @@ namespace CSToTypeScritpModelConverter.Windows
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 4129;
+        public const int CommandId = 0x0100;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("bf75ab56-89e9-4796-9b67-6b3380d09be7");
+        public static readonly Guid CommandSet = new Guid("c7469d08-1b90-4174-bef9-012df3f395b6");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -30,7 +27,7 @@ namespace CSToTypeScritpModelConverter.Windows
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainConverterWindowCommand"/> class.
+        /// Initializes a new instance of the <see cref="ConverterWindowCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
@@ -71,7 +68,7 @@ namespace CSToTypeScritpModelConverter.Windows
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in MainConverterWindowCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in ConverterWindowCommand's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 

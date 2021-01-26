@@ -14,7 +14,7 @@
                 var startIndex = convertedType.IndexOf("<") + 1;
                 var endIndex = convertedType.IndexOf(">") - 1;
 
-                if(startIndex != 0 && startIndex != -1 && endIndex != 0 && endIndex != -1)
+                if (startIndex != 0 && startIndex != -1 && endIndex != 0 && endIndex != -1)
                 {
                     int length = endIndex - startIndex + 1;
                     var substring = convertedType.Substring(startIndex, length);
@@ -58,8 +58,8 @@
                 case "ULong": convertedType = "number"; break;
                 case "Byte": convertedType = "number"; break;
                 case "SByte": convertedType = "number"; break;
-                case "DateTime": convertedType = "Date";break;
-                case "Dictionary": convertedType = "{[" +$"key: {firstValue}]: {secondtValue}" + "}";break;
+                case "DateTime": convertedType = "Date"; break;
+                case "Dictionary": convertedType = "{[" + $"key: {firstValue}]: {secondtValue}" + "}"; break;
             }
 
             if (isArrayType)

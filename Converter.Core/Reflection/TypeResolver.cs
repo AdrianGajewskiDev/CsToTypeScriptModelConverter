@@ -30,7 +30,7 @@ namespace Converter.Core.Reflection
 
                 return new CSharpClass(properties, type.Name, baseType);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 HandleError?.Invoke();
 

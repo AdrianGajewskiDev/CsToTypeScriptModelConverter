@@ -8,7 +8,7 @@ namespace Converter.Core
     {
         private IConverter m_Converter;
 
-        public ConverterBuilder AddErrorHandler<T>() where T:ErrorHandler, new()
+        public ConverterBuilder AddErrorHandler<T>() where T : ErrorHandler, new()
         {
             var handler = new T();
 
@@ -17,7 +17,7 @@ namespace Converter.Core
             return this;
         }
 
-        public ConverterBuilder AddConverter<T>() where T: IConverter, new()
+        public ConverterBuilder AddConverter<T>() where T : IConverter, new()
         {
             m_Converter = new T();
 

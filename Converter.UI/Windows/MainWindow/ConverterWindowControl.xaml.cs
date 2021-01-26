@@ -1,26 +1,26 @@
-﻿namespace CSToTypeScritpModelConverter.Windows
+﻿using Converter.UI.Models.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace Converter.UI.Windows.MainWindow
 {
-    using Converter.Core;
-    using Converter.Core.Converter;
-    using CSToTypeScritpModelConverter.Windows.Models.ViewModels;
-    using System.Windows.Controls;
     /// <summary>
-    /// Interaction logic for MainConverterWindowControl.
+    /// Interaction logic for ConverterWindowControl.
     /// </summary>
     public partial class ConverterWindowControl : UserControl
     {
+
         private ConverterWindowViewModel viewModel = new ConverterWindowViewModel();
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConverterWindowControl "/> class.
+        /// Initializes a new instance of the <see cref="ConverterWindowControl"/> class.
         /// </summary>
         public ConverterWindowControl()
         {
             this.InitializeComponent();
-
-
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             viewModel.CSCode = MainTextBox.Text;
             if (!string.IsNullOrEmpty(viewModel.CSCode))
@@ -32,9 +32,9 @@
             else
                 System.Windows.MessageBox.Show("Please paste your CSharp code", "Invalid C# code", System.Windows.MessageBoxButton.OK);
 
-
         }
 
         void ClearTextbox() => MainTextBox.Text = string.Empty;
+
     }
 }

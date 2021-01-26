@@ -1,6 +1,6 @@
-﻿using Xunit;
-using Converter.Core.Reflection;
+﻿using Converter.Core.Reflection;
 using FluentAssertions;
+using Xunit;
 
 namespace Converter.Tests
 {

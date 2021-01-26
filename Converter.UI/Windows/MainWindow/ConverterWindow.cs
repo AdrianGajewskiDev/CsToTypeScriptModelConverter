@@ -1,9 +1,9 @@
-﻿namespace CSToTypeScritpModelConverter.Windows
-{
-    using System;
-    using System.Runtime.InteropServices;
-    using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
+using System;
+using System.Runtime.InteropServices;
 
+namespace Converter.UI.Windows.MainWindow
+{
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
     /// </summary>
@@ -15,7 +15,7 @@
     /// implementation of the IVsUIElementPane interface.
     /// </para>
     /// </remarks>
-    [Guid("eb532ea4-9dc8-4a8b-86f6-bf41fa726e18")]
+    [Guid("852b500f-be9b-456d-b03b-f49152469fa9")]
     public class ConverterWindow : ToolWindowPane
     {
         /// <summary>
@@ -23,7 +23,7 @@
         /// </summary>
         public ConverterWindow() : base(null)
         {
-            this.Caption = "Converter";
+            this.Caption = "ConverterWindow";
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on

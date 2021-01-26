@@ -1,6 +1,5 @@
 ﻿using Converter.Core.Extensions;
 using Microsoft.CodeAnalysis;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,11 +32,11 @@ namespace Converter.Core.Values
                 var property = (IPropertySymbol)symbol;
                 string type = property.Type.Name;
 
-                if(property.Type is IArrayTypeSymbol arraySymbolType)
+                if (property.Type is IArrayTypeSymbol arraySymbolType)
                 {
                     type = arraySymbolType.ElementType.Name + "[]";
                 }
-                else if(property.Type is INamedTypeSymbol namedType && namedType.IsGenericType)
+                else if (property.Type is INamedTypeSymbol namedType && namedType.IsGenericType)
                 {
                     type = namedType.Name + "<";
                     var args = namedType.TypeArguments;
@@ -53,7 +52,7 @@ namespace Converter.Core.Values
                     type = type.Remove(lastCommaIndex, 1);
                 }
 
-                properties.Add(new CSharpProperty 
+                properties.Add(new CSharpProperty
                 {
                     Type = type,
                     Value = symbol.Name

@@ -1,10 +1,19 @@
-﻿using System;
+﻿using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.OLE.Interop;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.Win32;
+using System;
+using System.ComponentModel.Design;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Microsoft.VisualStudio.Shell;
+using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
-namespace CSToTypeScritpModelConverter
+namespace Converter.UI.Windows.MainWindow
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -24,15 +33,27 @@ namespace CSToTypeScritpModelConverter
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(CSToTypeScritpModelConverterPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideToolWindow(typeof(CSToTypeScritpModelConverter.Windows.ConverterWindow))]
-    public sealed class CSToTypeScritpModelConverterPackage : AsyncPackage
+    [ProvideToolWindow(typeof(ConverterWindow))]
+    [Guid(ConverterWindowPackage.PackageGuidString)]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    public sealed class ConverterWindowPackage : AsyncPackage
     {
         /// <summary>
-        /// CSToTypeScritpModelConverterPackage GUID string.
+        /// ConverterWindowPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "50469e6c-e8c0-4eb4-a929-f7d31337e2c8";
+        public const string PackageGuidString = "802eeae3-a882-4a60-ad79-ab063bbca2f9";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConverterWindowPackage"/> class.
+        /// </summary>
+        public ConverterWindowPackage()
+        {
+            // Inside this method you can place any initialization code that does not require
+            // any Visual Studio service because at this point the package object is created but
+            // not sited yet inside Visual Studio environment. The place to do all the other
+            // initialization is the Initialize method.
+        }
 
         #region Package Members
 
@@ -48,7 +69,7 @@ namespace CSToTypeScritpModelConverter
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await CSToTypeScritpModelConverter.Windows.ConverterWindowCommand.InitializeAsync(this);
+            await ConverterWindowCommand.InitializeAsync(this);
         }
 
         #endregion

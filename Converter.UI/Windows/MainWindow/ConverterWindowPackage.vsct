@@ -15,14 +15,14 @@
         defining some of the constants that we will use inside the file. -->
 
   <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
-  <Extern href="stdidcmd.h" />
+  <Extern href="stdidcmd.h"/>
 
   <!--This header contains the command ids for the menus provided by the shell. -->
-  <Extern href="vsshlids.h" />
+  <Extern href="vsshlids.h"/>
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidCSToTypeScritpModelConverterPackage">
+  <Commands package="guidConverterWindowPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -30,16 +30,6 @@
     called "command set" and is used to group different command inside a logically related
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
-
-    <!-- In this section you can define new menu groups. A menu group is a container for
-         other menus or buttons (commands); from a visual point of view you can see the
-         group as the part of a menu contained between two lines. The parent of a group
-         must be a menu. -->
-    <Groups>
-      <Group guid="guidCSToTypeScritpModelConverterPackageCmdSet" id="MainMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
-      </Group>
-    </Groups>
 
     <!--Buttons section. -->
     <!--This section defines the elements the user can interact with, like a menu command or a button
@@ -52,12 +42,11 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-  
-      <Button guid="guidCSToTypeScritpModelConverterPackageCmdSet" id="cmdidMainConverterWindowCommand" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages1" id="bmpPic1" />
+      <Button guid="guidConverterWindowPackageCmdSet" id="ConverterWindowCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <Icon guid="mainIcon" id="mainIcon1" />
         <Strings>
-          <ButtonText>CS to TS Converter </ButtonText>
+          <ButtonText>CS to TS Converter</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -69,32 +58,23 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\TestCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages1" href="Windows\Resources\MainConverterWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+        <Bitmap guid="mainIcon" href="Resources\Icon.png" usedList="mainIcon1"/>
     </Bitmaps>
   </Commands>
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidCSToTypeScritpModelConverterPackage" value="{50469e6c-e8c0-4eb4-a929-f7d31337e2c8}" />
+    <GuidSymbol name="guidConverterWindowPackage" value="{802eeae3-a882-4a60-ad79-ab063bbca2f9}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidCSToTypeScritpModelConverterPackageCmdSet" value="{bf75ab56-89e9-4796-9b67-6b3380d09be7}">
-      <IDSymbol name="MainMenuGroup" value="0x1020" />
-      <IDSymbol name="MainCommandId" value="0x0100" />
-      <IDSymbol value="4129" name="cmdidMainConverterWindowCommand" />
+    <GuidSymbol name="guidConverterWindowPackageCmdSet" value="{c7469d08-1b90-4174-bef9-012df3f395b6}">
+      <IDSymbol name="ConverterWindowCommandId" value="0x0100" />
     </GuidSymbol>
+	  <GuidSymbol name="mainIcon" value="{c7469d08-1b90-4174-bef9-012df3f235b6}">
+		  <IDSymbol name="mainIcon1" value="1" />
+	  </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{cd89bd88-3fab-48e5-8e42-5bff8827c5c6}">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{fd3f45b3-62e1-4af2-9e01-684930e7890e}" name="guidImages1">
+    <GuidSymbol name="guidImages" value="{510be8b9-e378-4a35-8b27-b2d996d87ecb}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />

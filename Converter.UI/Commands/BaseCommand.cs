@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CSToTypeScritpModelConverter.Windows.Commands
+namespace Converter.UI.Windows.Commands
 {
     public class BaseCommand : ICommand
     {
@@ -14,7 +14,7 @@ namespace CSToTypeScritpModelConverter.Windows.Commands
         }
 
 
-        public event EventHandler CanExecuteChanged = (s,e) => { };
+        public event EventHandler CanExecuteChanged = (s, e) => { };
 
         public bool CanExecute(object parameter)
         {

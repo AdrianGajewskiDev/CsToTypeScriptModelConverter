@@ -1,7 +1,7 @@
 ﻿using Converter.Core.ErrorHandling;
 using System.Windows.Forms;
 
-namespace CSToTypeScritpModelConverter.ErrorHandling
+namespace Converter.UI.ErrorHandling
 {
     public class ConverterErrorHandler : ErrorHandler
     {
