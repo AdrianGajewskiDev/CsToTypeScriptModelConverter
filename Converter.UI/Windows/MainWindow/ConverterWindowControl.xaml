@@ -15,15 +15,43 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="11" Content="Paste your CS code below"/>
-            <TextBox Name="MainTextBox" 
+            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="16" Content="Paste your CS code below"/>
+            <TextBox
+                    Name="MainTextBox" 
                      Height="auto"
                      TextWrapping="Wrap" AcceptsReturn="True" 
                      Grid.Row="1" Foreground="#000" FontSize="16"
                      AcceptsTab="True"/>
-            <Button Grid.Row="2" Margin="50 10"  FontSize="17"
-                    Width="150" Content="Convert" Click="Button_Click">
-            </Button>
+            <Grid Grid.Row="3">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="10" 
+                        Background="{TemplateBinding Background}" BorderBrush="#ccc" 
+                        BorderThickness="0,1,1,0" >
+                                        <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10" Click="Button_Click" FontSize="16" Content="Convert" Background="#83FF6E">
+                </Button>
+                <Button Grid.Column="1" Margin="15 10" Content="Save as" Background="#FF7B7D" Click="Button_Click_1">
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

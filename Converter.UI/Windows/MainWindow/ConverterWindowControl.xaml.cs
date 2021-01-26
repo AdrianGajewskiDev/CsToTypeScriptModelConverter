@@ -36,5 +36,11 @@ namespace Converter.UI.Windows.MainWindow
 
         void ClearTextbox() => MainTextBox.Text = string.Empty;
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(viewModel.TSCode))
+                System.Windows.MessageBox.Show("Cannot save empty file", "Empty code", System.Windows.MessageBoxButton.OK);
+
+        }
     }
 }

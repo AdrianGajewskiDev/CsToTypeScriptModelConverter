@@ -93,6 +93,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="previewImage.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Windows\MainWindow\Resources\Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
