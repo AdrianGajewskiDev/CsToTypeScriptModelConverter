@@ -41,6 +41,9 @@ namespace Converter.UI.Windows.MainWindow
             if (string.IsNullOrEmpty(viewModel.TSCode))
                 System.Windows.MessageBox.Show("Cannot save empty file", "Empty code", System.Windows.MessageBoxButton.OK);
 
+            var codeToSave = viewModel.TSCode;
+
+            viewModel.SaveFile(codeToSave);
         }
     }
 }

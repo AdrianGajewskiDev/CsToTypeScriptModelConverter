@@ -44,7 +44,7 @@ namespace Converter.Core.Converter
             stringBuilder.Append($"{prop.Value}: {prop.Type}; /");
         }
 
-        public void ConvertProperty(CSharpProperty prop, ref string result)
+        public void ConvertProperty(CSharpProperty prop, string result)
         {
             prop.Type = prop.Type.ConvertToTS();
 

@@ -4,27 +4,24 @@ using Converter.Core.Reflection;
 
 namespace Converter.Core
 {
-    public class ConverterBuilder
+    public class ConverterBuilder<TConverter> : IBuilder<TConverter> where TConverter : IConverter, new()
     {
         private IConverter m_Converter;
 
-        public ConverterBuilder AddErrorHandler<T>() where T : ErrorHandler, new()
+        public IBuilder<TConverter> AddConverter() 
         {
-            var handler = new T();
-
-            TypeResolver.HandleError += handler.Handle;
+            m_Converter = new TConverter();
 
             return this;
         }
 
-        public ConverterBuilder AddConverter<T>() where T : IConverter, new()
+        public IBuilder<TConverter> AddErrorHandler<TErrorHandler>() where TErrorHandler : ErrorHandler, new()
         {
-            m_Converter = new T();
+            TypeResolver.HandleError += new TErrorHandler().Handle;
 
             return this;
         }
 
-        public IConverter Build() => m_Converter;
-
+        public TConverter Build() => (TConverter)m_Converter;
     }
 }

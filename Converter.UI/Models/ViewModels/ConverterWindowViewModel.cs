@@ -1,5 +1,6 @@
 ﻿using Converter.Core;
 using Converter.Core.Converter;
+using Converter.UI.ErrorHandling;
 using Converter.UI.Windows.Commands;
 using System.Windows.Input;
 
@@ -12,9 +13,11 @@ namespace Converter.UI.Models.ViewModels
         public ConverterWindowViewModel()
         {
             ConvertCommand = new BaseCommand(Convert);
-            m_Converter = new ConverterBuilder()
-                .AddConverter<CTSConverter>()
+            m_Converter = new ConverterBuilder<CTSConverter>()
+                .AddConverter()
+                .AddErrorHandler<ConverterErrorHandler>()
                 .Build();
+
         }
 
 
@@ -22,7 +25,6 @@ namespace Converter.UI.Models.ViewModels
 
         private string m_CSCode;
         private string m_TSCode;
-
 
         public string CSCode
         {
@@ -34,6 +36,11 @@ namespace Converter.UI.Models.ViewModels
         private void Convert()
         {
             TSCode = m_Converter.Convert(m_CSCode);
+        }
+
+        public void SaveFile(string code)
+        {
+
         }
     }
 }
