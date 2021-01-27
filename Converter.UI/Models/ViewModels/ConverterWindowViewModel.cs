@@ -2,6 +2,9 @@
 using Converter.Core.Converter;
 using Converter.UI.ErrorHandling;
 using Converter.UI.Windows.Commands;
+using System.IO;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Converter.UI.Models.ViewModels
@@ -40,7 +43,26 @@ namespace Converter.UI.Models.ViewModels
 
         public void SaveFile(string code)
         {
+            var dialog = new SaveFileDialog();
+            dialog.DefaultExt = ".ts";
+            dialog.AddExtension = true;
+            dialog.ShowDialog();
 
+            try
+            {
+                var fileName = Path.GetFullPath(dialog.FileName);
+                var stream = new FileStream(fileName, FileMode.Create);
+
+                using (var sw = new StreamWriter(stream))
+                {
+                    sw.Write(TSCode);
+                }
+                stream.Close();
+            }
+            catch (FileNotFoundException ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Invalid file path", MessageBoxButton.OK);
+            }
         }
     }
 }
