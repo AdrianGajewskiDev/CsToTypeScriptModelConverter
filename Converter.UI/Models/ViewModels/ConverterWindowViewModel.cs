@@ -29,11 +29,7 @@ namespace Converter.UI.Models.ViewModels
         private string m_CSCode;
         private string m_TSCode;
 
-        public string CSCode
-        {
-            get => m_CSCode;
-            set => m_CSCode = value;
-        }
+        public string CSCode { get => m_CSCode; set => m_CSCode = value; }
         public string TSCode { get => m_TSCode; set => m_TSCode = value; }
 
         private void Convert()
@@ -41,7 +37,7 @@ namespace Converter.UI.Models.ViewModels
             TSCode = m_Converter.Convert(m_CSCode);
         }
 
-        public void SaveFile(string code)
+        public void SaveFile()
         {
             var dialog = new SaveFileDialog();
             dialog.DefaultExt = ".ts";
@@ -55,7 +51,7 @@ namespace Converter.UI.Models.ViewModels
 
                 using (var sw = new StreamWriter(stream))
                 {
-                    sw.Write(TSCode);
+                    sw.Write(m_TSCode);
                 }
                 stream.Close();
             }

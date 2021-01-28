@@ -10,8 +10,8 @@ namespace Converter.Console
 	                public partial class ProfileInfoModel : BaseNopModel
                     {
                         public DateTime AvatarUrl { get; set; }
-public Dictionary<DateTime,string> Values {get;set;}
-
+                        public Dictionary<DateTime,string> Values {get;set;}
+                        public List<string> list {get;set;}
                     }";
 
             var tsCode = new CTSConverter().Convert(code);

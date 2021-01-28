@@ -6,7 +6,7 @@ namespace Converter.Core.Converter
 {
     public interface IPropertyConverter
     {
-        void ConvertProperty(CSharpProperty prop, StringBuilder stringBuilder);
-        void ConvertProperty(CSharpProperty prop, string result);
+        void ConvertClassMember(IClassMember prop, StringBuilder stringBuilder);
+        void ConvertClassMember(IClassMember prop, string result);
     }
 }

@@ -28,8 +28,14 @@ namespace Converter.Core.Converter
 
             foreach (var prop in scClass.GetProperties())
             {
-                ConvertProperty(prop, tsCode);
+                ConvertClassMember(prop, tsCode);
             }
+
+            foreach (var field in scClass.GetFields())
+            {
+                ConvertClassMember(field, tsCode);
+            }
+
             tsCode.Append("}/");
 
             tsCode = tsCode.Replace("/", Environment.NewLine);
@@ -37,14 +43,14 @@ namespace Converter.Core.Converter
 
         }
 
-        public void ConvertProperty(CSharpProperty prop, StringBuilder stringBuilder)
+        public void ConvertClassMember(IClassMember prop, StringBuilder stringBuilder)
         {
             prop.Type = prop.Type.ConvertToTS();
 
             stringBuilder.Append($"{prop.Value}: {prop.Type}; /");
         }
 
-        public void ConvertProperty(CSharpProperty prop, string result)
+        public void ConvertClassMember(IClassMember prop, string result)
         {
             prop.Type = prop.Type.ConvertToTS();
 
