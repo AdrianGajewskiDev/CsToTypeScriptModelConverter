@@ -24,7 +24,7 @@ namespace Converter.Core.Reflection
 
                 var type = semanticModel.GetDeclaredSymbol(csCode.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
                 var baseType = type.BaseType.Name;
-                var properties = type.GetMembers().Select(Parse);
+                var properties = type.GetMembers().Where(x => x.Kind == SymbolKind.Property || x.Kind == SymbolKind.Field).Select(Parse);
 
                 if (properties.Count() == 0)
                     return null;
@@ -47,23 +47,9 @@ namespace Converter.Core.Reflection
                         var property = (IPropertySymbol)s;
 
                         if (property.Type is INamedTypeSymbol namedType && namedType.IsGenericType)
-                        {
-
-                            var type = namedType.Name + "<";
-                            var args = namedType.TypeArguments;
-                            var argsNames = args.Select(x => x.Name);
-
-                            foreach (var name in argsNames)
-                            {
-                                type += name.ConvertToTS() + ",";
-                            }
-                            type += ">";
-
-                            var lastCommaIndex = type.IndexOf(">") - 1;
-                            type = type.Remove(lastCommaIndex, 1);
-                            return new CSharpProperty { Type = type, Value = property.Name };
-                        }
-
+                            return ParseGeneric<CSharpProperty>(namedType, property.Name);
+                        else if (property.Type is IArrayTypeSymbol arrayType)
+                            return new CSharpProperty { Type = arrayType.ElementType.Name + "[]", Value = s.Name };
 
                         return new CSharpProperty { Type = property.Type.Name, Value = property.Name };
                     }
@@ -71,16 +57,38 @@ namespace Converter.Core.Reflection
                     {
                         var property = (IFieldSymbol)s;
 
-                        return new CSharpField { Type = property.Type.Name, Value = property.Name };
-                    }
-                case SymbolKind.ArrayType:
-                    {
-                        var property = (IArrayTypeSymbol)s;
+                        if (property.Type is INamedTypeSymbol namedType && namedType.IsGenericType)
+                            return ParseGeneric<CSharpField>(namedType, property.Name);
 
-                        return new CSharpProperty { Type = property.ElementType.Name + "[]", Value = property.Name };
+                        return new CSharpField { Type = property.Type.Name, Value = property.Name };
                     }
                 default: return null;
             }
         };
+
+        private static T ParseGeneric<T>(INamedTypeSymbol typeSymbol, string propName) where T:IClassMember, new()
+        {
+
+            var type = typeSymbol.Name + "<";
+            var args = typeSymbol.TypeArguments;
+            var argsNames = args.Select(x => x.Name);
+
+            foreach (var name in argsNames)
+            {
+                type += name.ConvertToTS() + ",";
+            }
+            type += ">";
+
+            var lastCommaIndex = type.IndexOf(">") - 1;
+            type = type.Remove(lastCommaIndex, 1);
+
+            var member = new T();
+
+            member.Type = type;
+            member.Value = propName;
+
+            return member;
+            
+        }
     }
 }

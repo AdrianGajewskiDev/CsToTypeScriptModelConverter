@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Converter.Core.Values
 {
@@ -34,9 +35,25 @@ namespace Converter.Core.Values
                 else if(member.GetType() == typeof(CSharpProperty))
                     properties.Add(new CSharpProperty(member.Type, member.Value));
             }
+
+            DeleteBackingFields();
         }
 
         public IList<CSharpProperty> GetProperties() => properties;
         public IList<CSharpField> GetFields() => fields;
+
+        /// <summary>
+        /// Deletes auto generated backing fields from Properties
+        /// </summary>
+        private void DeleteBackingFields()
+        {
+            ICollection<CSharpField> backingFields = fields.Where(x => x.Value.Contains("k__BackingField")).ToList();
+
+            foreach (var bcField in backingFields)
+            {
+                fields.Remove(bcField);
+            }
+
+        }
     }
 }

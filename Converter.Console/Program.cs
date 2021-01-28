@@ -9,9 +9,9 @@ namespace Converter.Console
             string code = @"
 	                public partial class ProfileInfoModel : BaseNopModel
                     {
-                        public DateTime AvatarUrl { get; set; }
+                        public DateTime[] AvatarUrl { get; set; }
                         public Dictionary<DateTime,string> Values {get;set;}
-                        public List<string> list {get;set;}
+                        public List<string> list;
                     }";
 
             var tsCode = new CTSConverter().Convert(code);
