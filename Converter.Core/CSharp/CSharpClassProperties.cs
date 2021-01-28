@@ -53,7 +53,6 @@ namespace Converter.Core.Values
             {
                 fields.Remove(bcField);
             }
-
         }
     }
 }
