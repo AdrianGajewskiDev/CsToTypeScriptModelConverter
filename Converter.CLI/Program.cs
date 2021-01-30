@@ -8,12 +8,14 @@ using Serilog.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Converter.CLI.CMD;
+using McMaster.Extensions.CommandLineUtils;
 
 namespace Converter.CLI
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
             string basePath = Directory.GetCurrentDirectory();
 
@@ -26,30 +28,30 @@ namespace Converter.CLI
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Settings(new LoggerSettings())
                 .CreateLogger();
-                
 
-            var host = new HostBuilder().ConfigureServices((context, services) => 
+
+            var host = new HostBuilder().ConfigureServices((context, services) =>
             {
-                services.AddLogging(conf => 
+                services.AddLogging(conf =>
                 {
                     conf.AddProvider(new SerilogLoggerProvider(Log.Logger));
                     var minLevel = Configuration.GetSection("Serilog:MinLogLevel")?.Value;
 
-                    if(!string.IsNullOrEmpty(minLevel))
+                    if (!string.IsNullOrEmpty(minLevel))
                         conf.SetMinimumLevel(Enum.Parse<LogLevel>(minLevel));
                 });
-            })
-            .Build();
+            });
 
             try
             {
-                Log.Information("Starting application...");
-                await host.RunAsync();
+                return await host.RunCommandLineApplicationAsync<ConverterCmd>(args);
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+            return 0;
         }
     }
 }
