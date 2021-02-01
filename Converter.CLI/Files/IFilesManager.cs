@@ -6,6 +6,8 @@ namespace Converter.CLI.Files
     internal interface IFilesManager
     {
         FileInfo[] GetFiles(string path, string extension);
-        Task<string> ReadCode(string path);
+        Task<string> ReadCodeAsync(string path);
+        Task SaveToFileAsync(string code, string filePath);
+
     }
 }

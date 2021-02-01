@@ -20,7 +20,7 @@ namespace Converter.CLI.Files
             return files;
         }
 
-        public async Task<string> ReadCode(string path)
+        public async Task<string> ReadCodeAsync(string path)
         {
             string result = string.Empty;
 
@@ -30,6 +30,14 @@ namespace Converter.CLI.Files
 
             return result;
 
+        }
+
+        public async Task SaveToFileAsync(string code, string filePath)
+        {
+            using var fileStream = new FileStream(filePath, FileMode.Create);
+            using var sw = new StreamWriter(fileStream);
+
+            await sw.WriteAsync(code);
         }
     }
 }

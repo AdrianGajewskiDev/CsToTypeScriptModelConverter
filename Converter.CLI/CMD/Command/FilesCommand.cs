@@ -45,8 +45,8 @@ namespace Converter.CLI.CMD.Command
             foreach (var file in files)
             {
                 MessagesWriter.Info($"Reading code from {file.Name}...");
-                var code = await _manager.ReadCode(file.FullName);
-                codesInText.Add(new CodeFile(file.Name, code));
+                var code = await _manager.ReadCodeAsync(file.FullName);
+                codesInText.Add(new CodeFile(file.Name, code, ".ts"));
             }
 
 
@@ -59,6 +59,19 @@ namespace Converter.CLI.CMD.Command
                     code.SwapCode(convertedCode);
                 }
             }
+
+            int progress = 0;
+            int all = codesInText.Count;
+            for (int i = 0; i < codesInText.Count; i++)
+            {
+                progress = i + 1;
+                var code = codesInText[i];
+                var savePath = Path.Combine(SpecifiedDirectory, code.FullName);
+                await _manager.SaveToFileAsync(code.Code,savePath);
+                MessagesWriter.Info($"Saving [{progress}/{all}]...");
+            }
+            MessagesWriter.Info($"Done");
+
         }
     }
 }
