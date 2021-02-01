@@ -10,6 +10,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Converter.CLI.CMD;
 using McMaster.Extensions.CommandLineUtils;
+using Converter.Core;
+using Converter.Core.Converter;
 
 namespace Converter.CLI
 {
@@ -29,6 +31,9 @@ namespace Converter.CLI
                 .ReadFrom.Settings(new LoggerSettings())
                 .CreateLogger();
 
+            var converter = new ConverterBuilder<CTSConverter>()
+                .AddConverter()
+                .Build();
 
             var host = new HostBuilder().ConfigureServices((context, services) =>
             {
@@ -40,6 +45,8 @@ namespace Converter.CLI
                     if (!string.IsNullOrEmpty(minLevel))
                         conf.SetMinimumLevel(Enum.Parse<LogLevel>(minLevel));
                 });
+
+                services.AddSingleton(converter);
             });
 
             try
