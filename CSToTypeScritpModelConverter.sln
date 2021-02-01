@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Converter.Tests", "Converte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter.UI", "Converter.UI\Converter.UI.csproj", "{E6B555C7-0BF6-409B-B521-456FB2A32281}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter.CLI", "Converter.CLI\Converter.CLI.csproj", "{1DA47DBD-4BD1-44CE-AA0E-49534A13DC59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Converter.CLI", "Converter.CLI\Converter.CLI.csproj", "{1DA47DBD-4BD1-44CE-AA0E-49534A13DC59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
