@@ -7,11 +7,10 @@ namespace Converter.Console
         static void Main(string[] args)
         {
             string code = @"
-	                public partial class ProfileInfoModel : BaseNopModel
+	                public record ProfileInfoModel 
                     {
                         public DateTime[] AvatarUrl { get; set; }
                         public Dictionary<DateTime,string> Values {get;set;}
-                        public List<string> list;
                     }";
 
             var tsCode = new CTSConverter().Convert(code);

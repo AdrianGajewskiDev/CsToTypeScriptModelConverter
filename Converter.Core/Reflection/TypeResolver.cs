@@ -22,7 +22,18 @@ namespace Converter.Core.Reflection
                 var compilation = CSharpCompilation.Create("Compilation").AddSyntaxTrees(csCode);
                 var semanticModel = compilation.GetSemanticModel(csCode, true);
 
-                var type = semanticModel.GetDeclaredSymbol(csCode.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
+                var declarationSyntax = csCode.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().First();
+
+                INamedTypeSymbol type = null;
+
+                if (declarationSyntax is RecordDeclarationSyntax recordDeclaration)
+                    type = semanticModel.GetDeclaredSymbol(recordDeclaration);
+                else if(declarationSyntax is ClassDeclarationSyntax classDeclaration)
+                    type = semanticModel.GetDeclaredSymbol(classDeclaration);
+
+                if (type == null)
+                    return null;
+
                 var baseType = type.BaseType.Name;
                 var properties = type.GetMembers().Where(x => x.Kind == SymbolKind.Property || x.Kind == SymbolKind.Field).Select(Parse);
 
