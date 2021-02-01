@@ -33,3 +33,5 @@ it one by one.
     ``` cmd
     dotnet ConverterCLI.dll f  --dir <path of files to convert> --out <your output directory> 
     ```
+ ### Sample:
+ ![Sample gif](https://github.com/AdrianGajewski1/CsToTypeScriptModelConverter/blob/main/Converter.CLI/sample.gif?raw=true)
