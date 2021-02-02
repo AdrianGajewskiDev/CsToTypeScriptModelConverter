@@ -1,4 +1,5 @@
 ﻿using Converter.Core.Extensions;
+using Converter.Core.Helpers;
 using Converter.Core.Reflection;
 using Converter.Core.Values;
 using System;
@@ -28,11 +29,17 @@ namespace Converter.Core.Converter
 
             foreach (var prop in scClass.GetProperties())
             {
+                if (prop.Value == SkippedTypes.EqualityContract)
+                    continue;
+
                 ConvertClassMember(prop, tsCode);
             }
 
             foreach (var field in scClass.GetFields())
             {
+                if (field.Value == SkippedTypes.EqualityContract)
+                    continue;
+
                 ConvertClassMember(field, tsCode);
             }
 

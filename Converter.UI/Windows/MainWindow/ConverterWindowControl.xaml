@@ -43,7 +43,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Foreground="#fff" Padding="10 0" 
                        FontSize="12" VerticalAlignment="Center"
-                       Content="Paste your CS code below or"/>
+                       Content="Paste your CS code below or select from file"/>
                 <Button Grid.Column="1" Width="80" Height="20" Background="#fff" Click="Button_Click_2">Select file</Button>
             </Grid>
 

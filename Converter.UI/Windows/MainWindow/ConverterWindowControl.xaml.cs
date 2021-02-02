@@ -34,8 +34,8 @@ namespace Converter.UI.Windows.MainWindow
         {
             if (string.IsNullOrEmpty(viewModel.TSCode))
                 System.Windows.MessageBox.Show("Cannot save empty file", "Empty code", System.Windows.MessageBoxButton.OK);
-
-            viewModel.SaveFile();
+            else
+                viewModel.SaveFile();
         }
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {

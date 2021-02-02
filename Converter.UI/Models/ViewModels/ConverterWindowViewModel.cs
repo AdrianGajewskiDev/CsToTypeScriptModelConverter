@@ -71,6 +71,9 @@ namespace Converter.UI.Models.ViewModels
 
             string code = string.Empty;
 
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return;
+
             try
             {
                 var fullPath = Path.GetFullPath(dialog.FileName);
