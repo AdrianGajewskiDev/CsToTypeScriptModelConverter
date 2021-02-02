@@ -8,6 +8,26 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" 
+                        Background="{TemplateBinding Background}" BorderBrush="#ccc" 
+                        BorderThickness="0,1,1,0" >
+                                <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
         <Grid Background="#000" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
@@ -15,7 +35,19 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label Foreground="#fff" Margin="50 0" Padding="30 0" FontSize="16" Content="Paste your CS code below"/>
+            <!---->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Foreground="#fff" Padding="10 0" 
+                       FontSize="12" VerticalAlignment="Center"
+                       Content="Paste your CS code below or"/>
+                <Button Grid.Column="1" Width="80" Height="20" Background="#fff" Click="Button_Click_2">Select file</Button>
+            </Grid>
+
+
             <TextBox
                     Name="MainTextBox" 
                      Height="auto"
@@ -23,26 +55,7 @@
                      Grid.Row="1" Foreground="#000" FontSize="16"
                      AcceptsTab="True"/>
             <Grid Grid.Row="3">
-                <Grid.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="10" 
-                        Background="{TemplateBinding Background}" BorderBrush="#ccc" 
-                        BorderThickness="0,1,1,0" >
-                                        <ContentPresenter x:Name="contentPresenter" 
-                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                      Content="{TemplateBinding Content}" 
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      Margin="{TemplateBinding Padding}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Grid.Resources>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="*"/>

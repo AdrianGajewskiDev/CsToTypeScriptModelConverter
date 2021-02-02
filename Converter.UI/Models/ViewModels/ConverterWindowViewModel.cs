@@ -2,7 +2,9 @@
 using Converter.Core.Converter;
 using Converter.UI.ErrorHandling;
 using Converter.UI.Windows.Commands;
+using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -15,7 +17,6 @@ namespace Converter.UI.Models.ViewModels
 
         public ConverterWindowViewModel()
         {
-            ConvertCommand = new BaseCommand(Convert);
             m_Converter = new ConverterBuilder<CTSConverter>()
                 .AddConverter()
                 .AddErrorHandler<ConverterErrorHandler>()
@@ -23,18 +24,15 @@ namespace Converter.UI.Models.ViewModels
 
         }
 
-
-        public ICommand ConvertCommand;
-
         private string m_CSCode;
         private string m_TSCode;
 
         public string CSCode { get => m_CSCode; set => m_CSCode = value; }
         public string TSCode { get => m_TSCode; set => m_TSCode = value; }
 
-        private void Convert()
+        public void Convert(string code)
         {
-            TSCode = m_Converter.Convert(m_CSCode);
+            TSCode = m_Converter.Convert(code);
         }
 
         public void SaveFile()
@@ -58,6 +56,42 @@ namespace Converter.UI.Models.ViewModels
             catch (FileNotFoundException ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Invalid file path", MessageBoxButton.OK);
+            }
+        }
+
+        public async Task OpenFileAsync(object sender, Action<string> callbackAction)
+        {
+            var dialog = new OpenFileDialog();
+
+            //just for now dont allow to select multiple file, 
+            //TOOD: implement multiselect handling
+            dialog.Multiselect = false;
+            dialog.DefaultExt = ".cs";
+            dialog.ShowDialog();
+
+            string code = string.Empty;
+
+            try
+            {
+                var fullPath = Path.GetFullPath(dialog.FileName);
+                code = await ReadFromFileAsync(fullPath);
+                callbackAction.Invoke(code);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Invalid file", MessageBoxButton.OK);
+            }
+        }
+        
+        private async Task<string> ReadFromFileAsync(string path)
+        {
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                using (var sr = new StreamReader(stream))
+                {
+                    var result = await sr.ReadToEndAsync();
+                    return result;
+                }
             }
         }
     }

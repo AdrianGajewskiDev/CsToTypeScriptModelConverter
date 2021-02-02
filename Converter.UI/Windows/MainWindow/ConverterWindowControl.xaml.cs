@@ -1,4 +1,6 @@
 ﻿using Converter.UI.Models.ViewModels;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,15 +25,7 @@ namespace Converter.UI.Windows.MainWindow
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             viewModel.CSCode = MainTextBox.Text;
-            if (!string.IsNullOrEmpty(viewModel.CSCode))
-            {
-                viewModel.ConvertCommand.Execute(sender);
-                ClearTextbox();
-                MainTextBox.Text = viewModel.TSCode;
-            }
-            else
-                System.Windows.MessageBox.Show("Please paste your CSharp code", "Invalid C# code", System.Windows.MessageBoxButton.OK);
-
+            ConvertCode(viewModel.CSCode);
         }
 
         void ClearTextbox() => MainTextBox.Text = string.Empty;
@@ -42,6 +36,23 @@ namespace Converter.UI.Windows.MainWindow
                 System.Windows.MessageBox.Show("Cannot save empty file", "Empty code", System.Windows.MessageBoxButton.OK);
 
             viewModel.SaveFile();
+        }
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            await viewModel.OpenFileAsync(sender, ConvertCode);
+        }
+
+        private void ConvertCode(string code)
+        {
+            if (!string.IsNullOrEmpty(code))
+            {
+                viewModel.Convert(code);
+                ClearTextbox();
+                MainTextBox.Text = viewModel.TSCode;
+            }
+            else
+                System.Windows.MessageBox.Show("Please paste your CSharp code", "Invalid C# code", System.Windows.MessageBoxButton.OK);
+
         }
     }
 }
