@@ -1,13 +1,11 @@
 ﻿using Converter.Core;
 using Converter.Core.Converter;
 using Converter.UI.ErrorHandling;
-using Converter.UI.Windows.Commands;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Converter.UI.Models.ViewModels
 {
@@ -34,8 +32,12 @@ namespace Converter.UI.Models.ViewModels
         {
             TSCode = m_Converter.Convert(code);
         }
-
-        public void SaveFile()
+        public void Reset()
+        {
+            CSCode = string.Empty;
+            TSCode = string.Empty;
+        }
+        public void SaveFile(string content)
         {
             var dialog = new SaveFileDialog();
             dialog.DefaultExt = ".ts";
@@ -49,7 +51,7 @@ namespace Converter.UI.Models.ViewModels
 
                 using (var sw = new StreamWriter(stream))
                 {
-                    sw.Write(m_TSCode);
+                    sw.Write(content);
                 }
                 stream.Close();
             }
@@ -58,7 +60,6 @@ namespace Converter.UI.Models.ViewModels
                 System.Windows.MessageBox.Show(ex.Message, "Invalid file path", MessageBoxButton.OK);
             }
         }
-
         public async Task OpenFileAsync(object sender, Action<string> callbackAction)
         {
             var dialog = new OpenFileDialog();
@@ -85,7 +86,6 @@ namespace Converter.UI.Models.ViewModels
                 System.Windows.MessageBox.Show(ex.Message, "Invalid file", MessageBoxButton.OK);
             }
         }
-        
         private async Task<string> ReadFromFileAsync(string path)
         {
             using (var stream = new FileStream(path, FileMode.Open))

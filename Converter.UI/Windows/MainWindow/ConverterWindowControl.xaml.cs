@@ -20,9 +20,20 @@ namespace Converter.UI.Windows.MainWindow
         public ConverterWindowControl()
         {
             this.InitializeComponent();
+            MainTextBox.TextChanged += TextChangedCallback;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TextChangedCallback(object sender, TextChangedEventArgs e)
+        {
+            var textbox = sender as TextBox;
+
+            if (!string.IsNullOrEmpty(textbox.Text))
+                return;
+
+            viewModel.Reset();
+        }
+
+        private void ConvertCode(object sender, RoutedEventArgs e)
         {
             viewModel.CSCode = MainTextBox.Text;
             ConvertCode(viewModel.CSCode);
@@ -30,14 +41,14 @@ namespace Converter.UI.Windows.MainWindow
 
         void ClearTextbox() => MainTextBox.Text = string.Empty;
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void SaveAs(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(viewModel.TSCode))
-                System.Windows.MessageBox.Show("Cannot save empty file", "Empty code", System.Windows.MessageBoxButton.OK);
+            if (string.IsNullOrEmpty(MainTextBox.Text))
+                MessageBox.Show("Cannot save empty file", "Empty code", MessageBoxButton.OK);
             else
-                viewModel.SaveFile();
+                viewModel.SaveFile(MainTextBox.Text);
         }
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void SelectFile(object sender, RoutedEventArgs e)
         {
             await viewModel.OpenFileAsync(sender, ConvertCode);
         }
@@ -47,11 +58,10 @@ namespace Converter.UI.Windows.MainWindow
             if (!string.IsNullOrEmpty(code))
             {
                 viewModel.Convert(code);
-                ClearTextbox();
                 MainTextBox.Text = viewModel.TSCode;
             }
             else
-                System.Windows.MessageBox.Show("Please paste your CSharp code", "Invalid C# code", System.Windows.MessageBoxButton.OK);
+                MessageBox.Show("Please paste your CSharp code", "Invalid C# code", MessageBoxButton.OK);
 
         }
     }
