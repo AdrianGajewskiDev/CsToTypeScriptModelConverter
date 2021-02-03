@@ -16,20 +16,11 @@ namespace Converter.Core.Reflection
         {
             try
             {
-
                 var csCode = CSharpSyntaxTree.ParseText(code);
-
                 var compilation = CSharpCompilation.Create("Compilation").AddSyntaxTrees(csCode);
                 var semanticModel = compilation.GetSemanticModel(csCode, true);
 
-                var declarationSyntax = csCode.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().First();
-
-                INamedTypeSymbol type = null;
-
-                if (declarationSyntax is RecordDeclarationSyntax recordDeclaration)
-                    type = semanticModel.GetDeclaredSymbol(recordDeclaration);
-                else if(declarationSyntax is ClassDeclarationSyntax classDeclaration)
-                    type = semanticModel.GetDeclaredSymbol(classDeclaration);
+                INamedTypeSymbol type = GetDeclaredType(csCode, semanticModel);
 
                 if (type == null)
                     return null;
@@ -49,6 +40,7 @@ namespace Converter.Core.Reflection
                 return null;
             }
         }
+
         private static Func<ISymbol, IClassMember> Parse = (s) => 
         {
             switch (s.Kind)
@@ -76,7 +68,6 @@ namespace Converter.Core.Reflection
                 default: return null;
             }
         };
-
         private static T ParseGeneric<T>(INamedTypeSymbol typeSymbol, string propName) where T:IClassMember, new()
         {
 
@@ -101,5 +92,28 @@ namespace Converter.Core.Reflection
             return member;
             
         }
+        private static INamedTypeSymbol GetDeclaredType(SyntaxTree csCode, SemanticModel semanticModel)
+        {
+            var declarationSyntax = csCode.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().First();
+            var declaredType = DeclaredType.Undefined;
+
+            if (declarationSyntax is ClassDeclarationSyntax classDeclaration)
+                declaredType = DeclaredType.Class;
+            else if (declarationSyntax is StructDeclarationSyntax structDeclaration)
+                declaredType = DeclaredType.Struct;
+            else if (declarationSyntax is RecordDeclarationSyntax recordDeclaration)
+                declaredType = DeclaredType.Record;
+
+            switch (declaredType)
+            {
+                case DeclaredType.Class: return semanticModel.GetDeclaredSymbol((declarationSyntax as ClassDeclarationSyntax));
+                case DeclaredType.Interface: return semanticModel.GetDeclaredSymbol((declarationSyntax as InterfaceDeclarationSyntax));
+                case DeclaredType.Struct: return semanticModel.GetDeclaredSymbol((declarationSyntax as StructDeclarationSyntax));
+                case DeclaredType.Record: return semanticModel.GetDeclaredSymbol((declarationSyntax as RecordDeclarationSyntax));
+                case DeclaredType.Undefined: return null;
+                default: return null;
+            }
+        }
+        private enum DeclaredType { Class, Interface, Struct, Record, Undefined }
     }
 }

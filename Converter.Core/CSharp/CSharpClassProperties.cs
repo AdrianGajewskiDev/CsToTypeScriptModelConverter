@@ -19,7 +19,7 @@ namespace Converter.Core.Values
             properties = new List<CSharpProperty>();
             fields = new List<CSharpField>();
 
-            if (!string.IsNullOrEmpty(baseType) && !baseType.Equals("Object"))
+            if (!string.IsNullOrEmpty(baseType) && !baseType.Equals("Object") && !baseType.Equals("ValueType"))
                 m_BaseType = baseType;
 
             m_ClassName = className;

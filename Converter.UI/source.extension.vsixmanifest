@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="CSToTypeScritpModelConverter.69cab2c4-8bb2-4186-87d2-98e48ba09fc7" Version="1.1.1" Language="en-US" Publisher="AdrianDev" />
+        <Identity Id="CSToTypeScritpModelConverter.69cab2c4-8bb2-4186-87d2-98e48ba09fc7" Version="1.1.2" Language="en-US" Publisher="AdrianDev" />
         <DisplayName>C# To TypeScript model converter</DisplayName>
         <Description xml:space="preserve">A visual studio extension that allows to convert CSharp class to TypeScript class.
 Convert C# Models, ViewModels and DTOs into their TypeScript equivalents.</Description>
