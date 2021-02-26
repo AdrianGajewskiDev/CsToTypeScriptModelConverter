@@ -62,8 +62,8 @@
       <DependentUpon>ConverterWindowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\ConverterWindowPackage.cs" />
-    <Compile Include="Windows\MainWindow\FileContextCommand.cs" />
-    <Compile Include="Windows\MainWindow\FileContextCommandPackage.cs" />
+    <Compile Include="FileCommand\FileContextCommand.cs" />
+    <Compile Include="FileCommand\FileContextCommandPackage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
@@ -103,7 +103,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <VSCTCompile Include="Windows\MainWindow\FileContextCommandPackage.vsct">
+    <VSCTCompile Include="FileCommand\FileContextCommandPackage.vsct">
       <ResourceName>Menus1.ctmenu</ResourceName>
     </VSCTCompile>
     <Content Include="Windows\MainWindow\Resources\FileContextCommand.png" />
